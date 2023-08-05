@@ -215,7 +215,7 @@ print(double)	# 20
 
 - 고정된 변수(상수 값)는 대문자 사용 
 
-  ex) SECONDS_PER_MINUTE = 60
+  ex) SECONDS_PER_MINUTE
 
 
 
