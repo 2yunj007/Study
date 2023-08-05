@@ -67,6 +67,8 @@ def BubbleSort(a, N):			# 정렬할 List, N 원소 수
 
    - 입력 배열의 각 원소에 대해 Counting Array에 조회하여 어느 좌표에 들어가야 하는지 체크한 뒤 조회된 원소의 개수를 1 감소시켜 앞의 좌표로 입력받을 수 있게 함
 
+![countiong sort](https://blog.kakaocdn.net/dn/QiWZZ/btq89vkmDh7/40myVsVLfxYVPs9fKtu7s0/img.png)
+
 ```python
 def Counting_Sort(A, B, k)
 # A []: 입력 배열 (0 to k)
