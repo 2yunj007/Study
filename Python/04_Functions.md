@@ -61,11 +61,15 @@ def make_sum(pram1, pram2):	# parameter
 - 괄호 안에 매개변수를 정의할 수 있음
 - 매개변수(parameter)는 함수에 전달되는 값을 나타냄
 
+
+
 ### 함수 body
 
 - 콜론(:) 다음에 들여쓰기 된 코드 블록
 - 함수가 실행될 때 수행되는 코드를 정의
 - Docstring은 함수 body 앞에 선택적으로 작성 가능한 함수 설명서
+
+
 
 ### 함수 반환 값
 
@@ -73,6 +77,8 @@ def make_sum(pram1, pram2):	# parameter
 - return 키워드 이후에 반환할 값을 명시
 - return 문은 함수의 실행을 종료하고, 결과를 호출 부분으로 반환
 - return 문이 없으면 자동으로 None이 반환됨
+
+
 
 ### 함수 호출
 
@@ -250,6 +256,8 @@ def func(pos1, pos2, default_arg='default', *args, kwd, **kwargs):
 - 함수 내에서는 바깥 Scope의 변수에 접근 가능하나 수정은 할 수 없음 (웬만하면 사용하지 않음)
 - 이름을 찾을 때 하위 scope로 가지 않음
 
+
+
 ### LEGB Rule 예시
 
 - sum이라는 이름을 global scope에서 사용하게 되면서 기존에 buil-in scope에 있던 내장함수 sum을 사용하지 못함
@@ -303,6 +311,8 @@ print(num)	# 0
 increment()
 print(num)	# 1
 ```
+
+
 
 ### 'global'  키워드 주의사항
 
@@ -601,9 +611,13 @@ print(math.sqrt(4))	# 2.0
 - 모듈 내 변수와 함수에 접근하려면 import문이 필요
 - 내장 함수 help를 사용해 모듈에 무엇이 들어 있는지 확인 가능
 
+
+
 ### 모듈 사용하기
 
 - '. (dot)'은 "점의 왼쪽 객체에서 점의 오른쪽 이름을 찾아라"라는 의미의 연산자
+
+
 
 ### 모듈을 import하는 다른 방법
 
@@ -617,6 +631,8 @@ print(pi)
 print(sqrt(4))
 ```
 
+
+
 ### 모듈 주의사항
 
 - 만약 서로 다른 모듈이 같은 이름의 함수를 제공할 경우 문제 발생
@@ -626,6 +642,8 @@ print(sqrt(4))
 from math import pi, sqrt
 from my_math import sqrt
 ```
+
+
 
 ### 직접 정의한 모듈 사용하기
 
