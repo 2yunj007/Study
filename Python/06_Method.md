@@ -942,10 +942,3 @@ print(hash('a'))  # 실행시마다 다름
   ```
 
   > `해시 가능성(hashable)`은 객체를 "딕셔너리의 키"나 "세트의 요소"로 사용할 수 있게 하는데, 이 자료 구조들이 내부적으로 해시 값을 사용하기 때문
-
-
-
-**참고 문헌**
-
-- https://docs.python.org/ko/3.9/library/stdtypes.html#set-types-set-frozenset
-- https://docs.python.org/ko/3.9/glossary.html#term-hashable
