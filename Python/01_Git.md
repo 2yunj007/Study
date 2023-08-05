@@ -165,56 +165,6 @@ $ git push -u origin master
 $ git pull origin master
 ```
 
-### git 사용 예시
-
-```
-SSAFY@DESKTOP-MDJG1NJ MINGW64 ~/Desktop/git-practice (master)
-$ git remote set-url origin https://github.com/2yunj007/git-practice
-
-SSAFY@DESKTOP-MDJG1NJ MINGW64 ~/Desktop/git-practice (master)
-$ git remote -v
-origin  https://github.com/2yunj007/git-practice (fetch)
-origin  https://github.com/2yunj007/git-practice (push)
-
-SSAFY@DESKTOP-MDJG1NJ MINGW64 ~/Desktop/git-practice (master)
-$ git push origin master
-info: please complete authentication in your browser...
-Enumerating objects: 3, done.
-Counting objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 208 bytes | 208.00 KiB/s, done.
-Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
-To https://github.com/2yunj007/git-practice
- * [new branch]      master -> master
-
-SSAFY@DESKTOP-MDJG1NJ MINGW64 ~/Desktop/git-practice (master)
-$ git status
-On branch master
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-        modified:   README.md
-
-no changes added to commit (use "git add" and/or "git commit -a")
-
-SSAFY@DESKTOP-MDJG1NJ MINGW64 ~/Desktop/git-practice (master)
-$ git add .
-
-SSAFY@DESKTOP-MDJG1NJ MINGW64 ~/Desktop/git-practice (master)
-$ git commit -m "first commit"
-[master 34cedc3] first commit
- 1 file changed, 1 insertion(+)
-
-SSAFY@DESKTOP-MDJG1NJ MINGW64 ~/Desktop/git-practice (master)
-$ git push origin master
-Enumerating objects: 5, done.
-Counting objects: 100% (5/5), done.
-Writing objects: 100% (3/3), 261 bytes | 261.00 KiB/s, done.
-Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
-To https://github.com/2yunj007/git-practice
-   0cfc533..34cedc3  master -> master
-$git clone remote_repo_url
-```
-
 
 
 ## 로컬
