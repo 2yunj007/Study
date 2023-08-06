@@ -10,24 +10,6 @@
 
 ![img](https://github.com/GimunLee/tech-refrigerator/raw/master/Algorithm/resources/bubble-sort-001.gif)
 
-
-
-### 시간 복잡도
-
-**O(n^2)**
-
-
-
-### 배열을 활용한 버블 정렬
-
-```python
-BubbleSort(a, N)				# 정렬할 배열과 배열의 크기
-	for i : N-1 -> 1			# 정렬될 구간의 끝
-		for j : 0 -> i-1		# 비교할 원소 중 왼쪽 원소의 인덱스
-			if a[j] > a[j+1] 	# 왼쪽 원소가 더 크면
-			a[j] <-> a[j+1]		# 오른쪽 원소와 교환
-```
-
 ```python
 def BubbleSort(a, N):			# 정렬할 List, N 원소 수
 	for i in range(N-1, 0, -1):	# 범위의 끝 위치
@@ -35,6 +17,12 @@ def BubbleSort(a, N):			# 정렬할 List, N 원소 수
             if a[j] > a[j+1]:
             	a[j], a[j+1] = a[j+1], a[j]
 ```
+
+
+
+### 시간 복잡도
+
+**O(n^2)**
 
 
 
