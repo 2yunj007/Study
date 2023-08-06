@@ -535,6 +535,12 @@ def binarySearch(a, low, high, key):
 
 
 
+### 시간 복잡도
+
+**O(logN)**
+
+
+
 # 선택 정렬 (Selection Sort)
 
 : 주어진 자료들 중 가장 작은 값의 원소부터 차례대로 선택하여 위치를 교환하는 방식
