@@ -557,7 +557,7 @@ def SelectionSort(a, N):
 
 
 
-## 셀렉션 알고리즘 (Selection Algorithm)
+# 셀렉션 알고리즘 (Selection Algorithm)
 
 : 저장되어 있는 자료로부터 k번째로 큰 혹은 작은 원소를 찾는 방법
 
