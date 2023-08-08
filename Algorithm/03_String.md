@@ -78,51 +78,30 @@ def kmp(t, p):
 ```python
 # Target : 검색 대상 // Pattern : 검색 패턴
 
-target = 'abcdabeeababcdabcef'
-pattern = 'eaba'
-
-
 # kmp 전처리
-def pre_process(target):
-    lps = [0] * len(target)
-
+def pre_process(string):
+    lps = [0] * len(string)
     j = 0   # lps를 만들기 위한 prefix에 대한 idx
-
-
     # i : pattern에서 지나가는 idx
     # j : 지나가고 있는 idx와 pattern 앞 부분과 같은 곳에 대한 idx
-
-    for i in range(1, len(target)):
-        # i & j의 값이 같으면, lps의 i 자리에 j + 1을 넣어 줌
-        if target[i] == target[j]:
-            lps[i] = j + 1
-            j += 1
-
-        # 다를 때
-        else:
-            # 다르다면, 패턴의 인덱스를 초기화함
-            j = 0
-            if target[i] == target[j]:
-                lps[i] = j + 1
-
+    for i in range(1, len(string)):
+        # j가 양수이고 target[i]와 target[j]가 다르면 lps[j-1]을 계속 j에 대입
+        while j > 0 and string[i] != string[j]:
+            j = lps[j-1]
+            # target[i]와 target[j]가 일치하면 j를 1증가
+        	if string[i] == string[j]:
+            	j += 1
+            lps[i] = j
     return lps
 
-
-print(pre_process(target))
-# [0, 0, 0, 0, 1, 2, 0, 0, 1, 2, 1, 0, 0, 0, 1, 2, 3, 0, 0]
-
-
 def KMP(target, pattern):
-    lps = pre_process(target)    # SKIP TABLE 만들기
-    # print(f'lps: {lps}')
+    lps = pre_process(pattern)    # SKIP TABLE 만들기
 
-    # i : target을 순회하는 idx
-    # j : pattern을 순회하는 idx
+    # lps를 활용해서 탐색
     i = 0
     j = 0
     # possition 값이 재할당되지 않는다면, 탐색 실패를 의미
     position = -1
-    # 끝까지 반복
     while i < len(target):
         # 같으면 이동 (고지식한 탐색과 같음)
         if pattern[j] == target[i]:
@@ -136,12 +115,13 @@ def KMP(target, pattern):
             else:
                 i += 1
         if j == len(pattern):
-            position = i - j
+            position = i - len(pattern)
             break
     return position
 
-
-print(KMP(target, pattern))     # 7
+target = 'abaceababaceababad'
+pattern = 'abaceababad'
+print(KMP(target, pattern))
 ```
 
 
