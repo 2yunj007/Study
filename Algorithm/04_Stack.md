@@ -282,3 +282,140 @@ DFS(v)
     }
 end DFS()
 ```
+
+
+
+### 연습 문제 3
+
+```python
+'''
+V E
+v1 w1 v2 w2 ...
+7 8
+1 2 1 3 2 4 2 5 4 6 5 6 6 7 3 7
+'''
+def dfs(n, V, adj_m):
+    stack = []      # stack 생성
+    visited = [0] * (V+1)    # visited 생성
+    visited[n] = 1  # 시작점 방문 표시
+    print(n)        # do[n] (n: 정점)
+    while True:
+        for w in range(1, V+1):
+            # 현재 정점 n에 인접하고 미방문 w 찾기
+            if adj_m[n][w] == 1 and visited[w] == 0:
+                stack.append(n) # push(w), v = w
+                n = w
+                print(n)    # do(w)
+                visited[n] = 1  # w 방문 표시
+                break   # n에 인접인 w 찾은 경우 for w 끝
+        else:
+            if stack:   # 스택에 지나온 정점이 남아 있으면
+                n = stack.pop() # pop()해서 다시 다른 w 찾기
+            else:   # 스택이 비어 있으면
+                break   # while True 끝
+
+
+V, E = map(int, input().split())    # 1번부터 V번 정점, E개의 간선
+arr = list(map(int, input().split()))
+adj_m = [[0]*(V+1) for _ in range(V+1)]
+for i in range(E):
+    v1, v2 = arr[i*2], arr[i*2+1]
+    adj_m[v1][v2] = 1
+    adj_m[v2][v1] = 1
+
+dfs(1, V, adj_m)
+
+# adj_m:
+# [[0, 0, 0, 0, 0, 0, 0, 0],
+#  [0, 0, 1, 1, 0, 0, 0, 0],
+#  [0, 1, 0, 0, 1, 1, 0, 0],
+#  [0, 1, 0, 0, 0, 0, 0, 1],
+#  [0, 0, 1, 0, 0, 0, 1, 0],
+#  [0, 0, 1, 0, 0, 0, 1, 0],
+#  [0, 0, 0, 0, 1, 1, 0, 1],
+#  [0, 0, 0, 1, 0, 0, 1, 0]]
+```
+
+
+
+# 그래프
+
+- 아이템들간의 연결관계
+- 정점들의 집합과 이들을 연결해주는 간선들의 집합으로 구성됨
+
+`V`: 정점의 개수
+
+`E`: 간선의 개수
+
+- 선형 자료 구조에서 나타내기 힘든 N;M 관계 표현이 가능
+- 인접 행렬
+  - 특정 노드에서 연결된 노드의 정보
+
+
+
+## stack을 활용하는 이유
+
+- "내가 돌아갈 곳을 저장해 놓는 것" ==  Stack 활용 (후입선출)
+
+- 그래프를 표현하는 방법 (인접 행렬)
+
+1. 딕셔너리의 활용
+
+   ```python
+   graph = {}
+   graph['A'] = ['B','C']
+   graph['B'] = ['D', 'E']
+   ```
+
+2. 2차원 배열의 활용
+
+   ```
+   #   A B C D E F
+   # A 0 1 1 0 0 0 
+   # B 0 0 0 1 1 0
+   # C
+   # D
+   # E
+   # F
+   ```
+
+
+
+```python
+# 인접 행렬 생성
+V, E = map(int, inpt().split()) # 노드, 간선
+
+data = list(map(int, input().split())) # 간선 정보
+
+arr = [[0] * (v+1) for _ in range(V+1)]
+visited = [0] * (V + 1) # 노드의 방문 여부 체크 리스트
+#visited = [False] * (V + 1)
+
+for i in range(E):
+    n1, n2 = data[i * 2], data[i * 2 + 1]
+    arr[n1][n2] = 1 # n1과 n2는 인접해있다
+    arr[n2][n1] = 1
+    
+# 재귀
+def dfs(v):
+    visited[v] = 1
+    print(v, end = ' ') # 특정 로직을 수행하는 곳
+    # v 현재 시작 정점, 인접한 정점 중에서 방문을 하지 않은 곳
+    for w in range(1, V+1):
+        if arr[v][w] == 1 and visited[w] == 0:
+        	dfs(w)
+            
+# 반복문
+def dfs(v):
+    stack = [v]
+    # 스택이 빌 때까지 반복
+    while len(stack):
+        v = stack.pop()
+        visited[v] = 1
+        for w in range(1, V+1):
+            id arr[v][w] == 1 and vistied[w] == 0:
+                stack.append(w)
+                
+dfs(1)
+```
+
