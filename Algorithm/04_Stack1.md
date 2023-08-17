@@ -205,7 +205,7 @@ memo[1] = 1
 ## 피보나치 수 DP 적용
 
 - 피보나치 수는 부분 문제의 답으로부터 본 문제의 답을 얻을 수 있으므로 최적 부분 구조로 이루어져 있음
-- Fibonacci(n) 함수는 Fibonacci(n-1), Fibonacci(n-2), ... Fibonacci(0)의 부분집합으로 나뉨
+- xxxxxxxxxx def f1(b, e):    global cnt1    if b == 0:        return 1    r = 1    for i in range(e):        r *= b        cnt1 += 1    return r​def f2(b, e):    global cnt2    if b == 0 or e == 0:        return 1    if e % 2:  # 홀수면        r = f2(b, (e-1)//2)        return r*r*b    else:   # 짝수면        r = f2(b, e//2)        cnt2 += 1        return r*r​cnt1 = 0cnt2= 0print(f1(2, 20), cnt1)print(f2(2, 20), cnt2)python
 - 부분 문제로 나누는 일을 끝냈으면 가장 작은 부분 문제부터 해를 구함
 - 그 결과를 테이블에 저장하고, 테이블에 저장된 부분 문제의 해를 이용하여 상위 문제의 해를 구함
   - 테이블 인덱스: [0], [1], [2], ... [n]
