@@ -172,7 +172,7 @@ def deQueue():
 
 
 
-- 공백 상태 및 포화 상태 검사 : **isEmpty(), isFull()**
+- xxxxxxxxxx def f1(b, e):    global cnt1    if b == 0:        return 1    r = 1    for i in range(e):        r *= b        cnt1 += 1    return r​def f2(b, e):    global cnt2    if b == 0 or e == 0:        return 1    if e % 2:  # 홀수면        r = f2(b, (e-1)//2)        return r*r*b    else:   # 짝수면        r = f2(b, e//2)        cnt2 += 1        return r*r​cnt1 = 0cnt2= 0print(f1(2, 20), cnt1)print(f2(2, 20), cnt2)python
 
 ```python
 def isEmpty():
@@ -205,3 +205,105 @@ def isFull():
 - 버퍼링 : 버퍼를 활용하는 방식 또는 버퍼를 채우는 동작을 의미
 - 버퍼는 일반적으로 입출력 및 네트워크와 관련된 기능에서 이용
 - 순서대로 입력/출력/전달이 되어야 하므로 FIFO 방식인 큐가 활용됨
+
+
+
+# 너비우선탐색 (Breadth First Search, BFS)
+
+- 너비우선탐색은 탐색 시작점의 인접한 정점들을 먼저 모두 차례로 방문한 후에, 방문했던 정점을 시작점으로 하여 다시 인접한 정점들을 차례로 방문하는 방식
+- 인접한 정점들에 대해 탐색을 한 후 차례로 다시 너비우선탐색을 진행해야 하므로, 선입선출 형태의 자료구조인 큐를 활용함
+
+<img src="https://lh5.googleusercontent.com/JKY4V8OZEs5L68Mh2ZY5ZqiqGkaj8esWnTEUwEdygFQdRFowh7aCWpibaPRqkcR3SHBh2Q4Io856f2fAzM5Ae3nD2uLj7AEU3NnQfZ55E2ni0EzXceoVTJtHzqGlUhQ9-izy5Y0v1DK0xIQ4vUxs9Ds" alt="img" style="zoom: 50%;" />
+
+```python
+def BFS(G, v)	# 그래프 G, 탐색 시작점 v
+	visited = [0]*(n+1)	# n: 정점의 개수
+    queue = []			# 큐 생성
+    queue.append(v)		# 시작점 v를 큐에 삽입
+    while queue:		# 큐가 비어 있지 않은 경우
+        t = queue.pop(0)		# 큐의 첫 번째 원소 반환
+        if not visited[t]:		# 방문되지 않은 곳이라면
+            visitied[t] = True		# 방문한 것으로 표시
+            visit(t)				# 정점 t에서 할 일
+            for i in G[t]:			# t와 연결된 모든 정점에 대해
+                if not visited[i]:		# 방문되지 않은 곳이라면
+                    queue.append(i)		# 큐에 넣기
+```
+
+
+
+## BFS 알고리즘
+
+```python
+# 위 방법보다 이렇게 하는 게 중복으로 탐색하는 거 방지하는 데 좋음
+def BFS(G, v)	# 그래프 G, 탐색 시작점 v
+	visited = [0]*(n+1)	# n: 정점의 개수
+    queue = []			# 큐 생성
+    queue.append(v)		# 시작점 v를 큐에 삽입
+    visited[v] = 1
+    while queue:		# 큐가 비어 있지 않은 경우
+        t = queue.pop(0)		# 큐의 첫 번째 원소 반환
+        visit(t)
+        for i in G[t]:			# t와 연결된 모든 정점에 대해
+            if not visited[i]:		# 방문되지 않은 곳이라면
+                queue.append(i)		# 큐에 넣기
+                visited[i] = visited[t] + 1		# n으로부터 1만큼 이동
+```
+
+
+
+### 연습 문제 3
+
+```python
+def bfs(s, V):  # 시작 정점 s, 마지막 정점 V
+    visited = [0] * (V+1)   # visited 생성
+    q = []          # 큐 생성
+    q.append(s)     # 시작점 인큐
+    visited[s] = 1  # 시작점 방문 표시
+    while q:        # 큐에 정점이 남아 있으면 front != rear
+        t = q.pop(0)	# 디큐
+        print(t, end=' ')    # 방문한 정점에서 할 일
+        for w in adj_l[t]:   # 인접한 정점 중 인큐되지 않은 정점 w가 있으면
+            if visited[w] == 0:
+                q.append(w)     # w 인큐, 인큐되었음을 표시
+                visited[w] = visited[t] + 1     # 문제에 따라 유무 결정
+
+
+V, E = map(int, input().split())    # 1번부터 V번 정점, E개의 간선
+arr = list(map(int, input().split()))
+# 인접 리스트 ---------------------------
+adj_l = [[] for _ in range(V+1)]
+for i in range(E):
+    v1, v2 = arr[i*2], arr[i*2+1]
+    adj_l[v1].append(v2)
+    adj_l[v2].append(v1)    # 방향이 없는 경우
+# -------------------------------------
+bfs(1, 7)
+```
+
+```python
+def bfs(s, V):  # 시작 정점 s, 마지막 정점 V
+    visited = [0] * (V+1)   # visited 생성
+    q = []          # 큐 생성
+    q.append(s)     # 시작점 인큐
+    visited[s] = 1  # 시작점 방문 표시
+    while q:        # 큐에 정점이 남아 있으면 front != rear
+        t = q.pop(0)    # 디큐
+        print(t, end=' ')    # 방문한 정점에서 할 일
+        for w in range(1, V+1):  # 인접한 정점 중 인큐되지 않은 정점 w가 있으면
+            if adj_m[t][w] == 1 and visited[w] == 0:
+                q.append(w)     # w 인큐, 인큐되었음을 표시
+                visited[w] = visited[t] + 1     # 문제에 따라 유무 결정
+
+
+V, E = map(int, input().split())    # 1번부터 V번 정점, E개의 간선
+arr = list(map(int, input().split()))
+# 인접 행렬 ---------------------------
+adj_m = [[0]*(V+1) for _ in range(V+1)]
+for i in range(E):
+    v1, v2 = arr[i*2], arr[i*2+1]
+    adj_m[v1][v2] = 1
+    adj_m[v2][v1] = 1    # 방향이 없는 경우
+# -------------------------------------
+bfs(1, 7)
+```
