@@ -170,10 +170,6 @@ def deQueue():
         return cQ[front]
 ```
 
-
-
-- xxxxxxxxxx def f1(b, e):    global cnt1    if b == 0:        return 1    r = 1    for i in range(e):        r *= b        cnt1 += 1    return r​def f2(b, e):    global cnt2    if b == 0 or e == 0:        return 1    if e % 2:  # 홀수면        r = f2(b, (e-1)//2)        return r*r*b    else:   # 짝수면        r = f2(b, e//2)        cnt2 += 1        return r*r​cnt1 = 0cnt2= 0print(f1(2, 20), cnt1)print(f2(2, 20), cnt2)python
-
 ```python
 def isEmpty():
     return fornt == rear
@@ -212,6 +208,7 @@ def isFull():
 
 - 너비우선탐색은 탐색 시작점의 인접한 정점들을 먼저 모두 차례로 방문한 후에, 방문했던 정점을 시작점으로 하여 다시 인접한 정점들을 차례로 방문하는 방식
 - 인접한 정점들에 대해 탐색을 한 후 차례로 다시 너비우선탐색을 진행해야 하므로, 선입선출 형태의 자료구조인 큐를 활용함
+- 각 정점을 최단 경로로 방문한다는 특징이 있음
 
 <img src="https://lh5.googleusercontent.com/JKY4V8OZEs5L68Mh2ZY5ZqiqGkaj8esWnTEUwEdygFQdRFowh7aCWpibaPRqkcR3SHBh2Q4Io856f2fAzM5Ae3nD2uLj7AEU3NnQfZ55E2ni0EzXceoVTJtHzqGlUhQ9-izy5Y0v1DK0xIQ4vUxs9Ds" alt="img" style="zoom: 50%;" />
 
@@ -236,6 +233,7 @@ def BFS(G, v)	# 그래프 G, 탐색 시작점 v
 
 ```python
 # 위 방법보다 이렇게 하는 게 중복으로 탐색하는 거 방지하는 데 좋음
+# 큐에 넣으면서 방문
 def BFS(G, v)	# 그래프 G, 탐색 시작점 v
 	visited = [0]*(n+1)	# n: 정점의 개수
     queue = []			# 큐 생성
@@ -252,7 +250,7 @@ def BFS(G, v)	# 그래프 G, 탐색 시작점 v
 
 
 
-### 연습 문제 3
+### 연습 문제
 
 ```python
 def bfs(s, V):  # 시작 정점 s, 마지막 정점 V
