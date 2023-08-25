@@ -209,7 +209,7 @@ def powerset(idx):
     
     # idx 자리의 원소를 뽑고 감
     sel[idx] = 1
-    powerset(idx+1)
+    powerset(idx + 1)
     # idx 자리를 안 뽑고 감
     sel[idx] = 0
     powerset(idx + 1)
