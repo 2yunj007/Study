@@ -361,6 +361,14 @@ print(sorted(numbers))  # [1, 2, 3]
 print(numbers)  # [3, 2, 1]
 ```
 
+- 리스트 요소의 첫 번째 값으로만 정렬
+
+```python
+numbers = [[5, 1], [3, 2], [1, 0]]
+numbers.sort(key=lambda x:x[0])
+print(numbers)	# [[1, 0], [3, 2], [5, 1]]
+```
+
 
 
 ## .reverse()
