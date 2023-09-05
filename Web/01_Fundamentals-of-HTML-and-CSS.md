@@ -409,8 +409,6 @@ color: purple;
 
 
 
-
-
 ## 참고
 
 ### HTML 관련 사항
