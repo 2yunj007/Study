@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CSS Position</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 1500px;
+    }
+
+    .container {
+      position: relative; /* absolute의 부모를 명확하게 지정 */
+      height: 300px;
+      width: 300px;
+      border: 1px solid black;
+    }
+
+    .box {
+      height: 100px;
+      width: 100px;
+      border: 1px solid black;
+    }
+
+    .static {
+      position: static; /* 기본값 */
+      background-color: lightcoral;
+    }
+
+    .absolute {
+      position: absolute; /* 절대적 위치 */
+      /* 본인이 차지하고 있던 영역을 버리고 떠남 */
+      /* 공간이 빈만큼 아래 레이아웃이 차고 올라옴 */
+      /* 다른 요소들(레이아웃)에게 영향을 줌 */
+      /* static이 아닌 부모를 찾아 올라감 */
+      background-color: lightgreen;
+      /* 부모를 찾다 없으면 body를 기준으로 이동 */
+      /* 현재는 container가 부모 */
+      top: 100px; 
+      left: 100px;
+    }
+
+    .relative {
+      position: relative; /* 상대적 위치 */
+      /* 기준점: 자기자신의 과거(static 시절)의 위치 */
+      /* 본인의 영역을 버리지 않음 */
+      /* 아래 레이아웃이 깨지지 않도록 유지 가능 */
+      background-color: lightblue;
+      top: 100px; /* 우측 하단으로 이동 */
+      left: 100px;
+    }
+
+    .fixed {
+      position: fixed; /* 고정 위치 */
+      /* 브라우저의 화면에 붙음 */
+      /* 스크롤을 내려도 고정 */
+      background-color: gray;
+      top: 0;
+      right: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="box static">Static</div>
+    <div class="box absolute">Absolute</div>
+    <div class="box relative">Relative</div>
+    <div class="box fixed">Fixed</div>
+  </div>
+</body>
+
+</html>
