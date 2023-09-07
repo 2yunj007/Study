@@ -268,7 +268,7 @@ def nCr(n, r, s):	# n개에서 r개를 고르는 조합, s: 선택할 수 있는
 A = [1, 2, 3, 4, 5]
 N = len(A)
 R = 2
-comb[0]*R
+comb = [0]*R
 nCr(N, R, 0)
 ```
 
