@@ -131,7 +131,7 @@
 
 > 기본적인 모양과 기능 이외에 의미를 가지는 HTML 요소
 
-- 검색엔진 및 개발자가 웹 페이지 콘텐츠를 이해하기 쉽도록
+- **검색엔진** 및 개발자가 웹 페이지 콘텐츠를 이해하기 쉽도록
 - header, nav, main, article, section, aside, footer
 
 ![HTML Semantic Elements](https://www.w3schools.com/html/img_sem_elements.gif)
