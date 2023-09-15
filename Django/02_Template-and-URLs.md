@@ -588,7 +588,6 @@ from django.urls import path
 # 명시적 상대경로
 from . import views
 
-app_name = 'pages'
 urlpatterns = [
     path('index/', views.index),
 ]
@@ -649,7 +648,7 @@ urlpatterns = [
 - href 속성 값뿐만 아니라 form의 action 속성처럼 **url을 작성하는 모든 위치에서 변경**
 
 ```html
-<!-- articles/index/html -->
+<!-- articles/index.html -->
 {% extends "base.html" %}
 
 {% block content %}
