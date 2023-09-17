@@ -436,7 +436,7 @@ urlpatterns = [
 
 ```python
 path('articles/<int:num>/', views.detail)
-path('articles/<str:name/', views.greeting)
+path('articles/<str:name>/', views.greeting)
 ```
 
 
