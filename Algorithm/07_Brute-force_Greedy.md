@@ -261,7 +261,7 @@ def nCr(n, r, s):	# n개에서 r개를 고르는 조합, s: 선택할 수 있는
     if r == 0:
         print(*comb)
     else:
-        for i in range(s, n-r-1):
+        for i in range(s, n):
             comb[r-1] = A[i]
             nCr(n, r-1, i+1)
 
