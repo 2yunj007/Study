@@ -282,3 +282,322 @@ else:
 '''
 ```
 
+
+
+## 최소 신장 트리(MST)
+
+> 무방향 가중치 그래프에서 신장 트리를 구성하는 간선들의 가중치의 합이 최소인 신장 트리
+
+- **그래프에서 최소 비용 문제**
+
+  - 모든 정점을 연결하는 간선들의 가중치의 합이 최소가 되는 트리 -> 최소 신장 트리
+
+  - 두 정점 사이의 최소 비용의 경로 찾기 -> 다익스트라
+
+- **신장 트리**
+  -  n개의 정점으로 이루어진 무방향 그래프에서 n개의 정점과 n-1개의 간선으로 이루어진 트리
+  - 모든 정점이 연결되어 있음
+  - 사이클이 존재하지 않는 부분 그래프
+  - 한 그래프에서 여러 개의 신장 트리가 나올 수 있음
+
+
+
+### Prim 알고리즘
+
+- 하나의 정점에서 연결된 간선들 중에 하나씩 선택하면서 MST를 만들어 가는 방식
+  - 임의 정점 하나 선택해서 시작
+  - 선택한 정점과 인접하는 정점들 중의 최소 비용의 간선이 존재하는 정점을 선택
+  - 모든 정점이 선택될 때까지 앞의 과정을 반복
+- 서로소 2개의 집합(2 disjoint - sets) 정보를 유지
+  - 트리 정점들(tree vertices) - MST를 만들기 위해 선택된 정점들
+  - 비트리 정점들(nontree vertices) - 선택되지 않은 정점들
+
+```py
+'''
+7 11
+0 1 32
+0 2 31
+0 5 60
+0 6 51
+1 2 21
+2 4 46
+2 6 25
+3 4 34
+3 5 18
+4 5 40
+4 6 51
+'''
+
+import heapq
+
+
+def prim(start):
+    heap = []
+    # MST 에 포함되었는지 여부
+    MST = [0] * V
+
+    # 가중치, 정점 정보
+    heapq.heappush(heap, (0, start))
+    # 누적합 저장
+    sum_weight = 0
+
+    while heap:
+        # 가장 적은 가중치를 가진 정점을 꺼냄
+        weight, v = heapq.heappop(heap)
+
+        # 이미 방문한 노드라면 pass
+        if MST[v]:
+            continue
+
+        # 방문 체크
+        MST[v] = 1
+        
+        # 누적합 추가
+        sum_weight += weight
+
+        # 갈 수 있는 노드들을 체크
+        for next in range(V):
+            # 갈 수 없거나 이미 방문했다면 pass
+            if graph[v][next] == 0 or MST[next]:
+                continue
+
+            heapq.heappush(heap, (graph[v][next], next))
+
+    return sum_weight
+
+
+V, E = map(int, input().split())
+# 인접행렬
+graph = [[0] * V for _ in range(V)]
+
+for _ in range(E):
+    f, t, w = map(int, input().split())
+    graph[f][t] = w
+    graph[t][f] = w     # 무방향 그래프
+
+result = prim(0)
+print(f'최소 비용 = {result}')
+```
+
+
+
+### KRUSKAL 알고리즘
+
+- 간선을 하나씩 선택해서 MST를 찾는 알고리즘
+- 최초, 모든 간선을 가중치에 따라 오름차순으로 정렬
+- 가중치가 가장 낮은 간선부터 선택하면서 트리를 증가시킴
+  - 사이클이 존재하면 다름으로 가준치가 낮은 간선 선택
+- n-1개의 간선이 선택될 때까지 앞의 과정을 반복
+
+```py
+'''
+7 11
+0 1 32
+0 2 31
+0 5 60
+0 6 51
+1 2 21
+2 4 46
+2 6 25
+3 4 34
+3 5 18
+4 5 40
+4 6 51
+'''
+
+# 모든 간선들 중 비용이 가장 적은 걸 우선으로 고르자
+V, E = map(int, input().split())
+edge = []
+for _ in range(E):
+    f, t, w = map(int, input().split())
+    edge.append([f, t, w])
+# w 를 기준으로 정렬
+edge.sort(key=lambda x: x[2])
+
+# 사이클 발생 여부를 union find 로 해결
+parents = [i for i in range(V)]
+
+def find_set(x):
+    if parents[x] == x:
+        return x
+
+    parents[x] = find_set(parents[x])
+    return parents[x]
+
+
+def union(x, y):
+    x = find_set(x)
+    y = find_set(y)
+
+    if x == y:
+        return
+
+    if x < y:
+        parents[y] = x
+    else:
+        parents[x] = y
+
+# 현재 방문한 정점 수
+cnt = 0
+sum_weight = 0
+for f, t, w in edge:
+    # 싸이클이 발생하지 않는다면
+    if find_set(f) != find_set(t):
+        cnt += 1
+        sum_weight += w
+        union(f, t)
+        # MST 구성이 끝나면
+        if cnt == V:
+            break
+print(f'최소 비용 = {sum_weight}')
+```
+
+
+
+## 최단 경로
+
+> 간선의 가중치가 있는 그래프에서 두 정점 사이의 경로들 중에 간선의 가중치의 합이 최소인 경로
+
+- 하나의 시작 정점에서 끝 정점까지의 최단 경로
+  - **다익스트라(dijkstra) 알고리즘**
+    - 음의 가중치를 허용하지 않음
+  - **벨만-포드(Bellman-Ford) 알고리즘**
+    - 음의 가중치 허용
+- 모든 정점들에 대한 최단 경로
+  - **플로이드-워샬(Floyd-Warshall) 알고리즘**
+
+
+
+### Dijkstra 알고리즘
+
+> 시작 정점에서 거리(누적 거리)가 최소인 정점을 선택해 나가면서 최단 경로를 구하는 방식
+
+- 시작 정점(s)에서 끝 정점(t)까지의 최단 경로에 정점 x가 존재
+- 이때, 최단 경로는 s에서 x까지의 최단 경로와 x에서 t까지의 최단 경로로 구성됨
+- 탐욕 기법을 사용한 알고리즘으로 MST의 프림 알고리즘과 유사
+
+![img](https://upload.wikimedia.org/wikipedia/commons/5/57/Dijkstra_Animation.gif)
+
+```python
+'''
+6 8
+0 1 2
+0 2 4
+1 2 1
+1 3 7
+2 4 3
+3 4 2
+3 5 1
+4 5 5
+'''
+
+# 최단 거리 문제 유형
+# 1. 특정 지점 -> 도착 지점까지의 최단 거리 : 다익스트라
+# 2. 가중치에 음수가 포함되어 있네 ? : 밸만포드
+# 3. 여러 지점 -> 여러 지점까지의 최단 거리
+#       - 여러 지점 모두 다익스트라 돌리기 -> 시간 복잡도 계산 잘해야함
+#       - 플로이드-워샬
+
+
+# 내가 갈 수 있는 경로 중 누적거리가 제일 짧은 것부터 고르자!
+import heapq
+
+# 입력
+n, m = map(int, input().split())
+# 인접리스트
+graph = [[] for i in range(n)]
+for _ in range(m):
+    f, t, w = map(int, input().split())
+    graph[f].append([t, w])
+
+# 1. 누적 거리를 계속 저장
+INF = int(1e9) # 최대값으로 1억 - 대충 엄청 큰 수
+distance = [INF] * n
+
+def dijkstra(start):
+    # 2. 우선순위 큐
+    pq = []
+    # 출발점 초기화
+    heapq.heappush(pq, (0, start))
+    distance[start] = 0
+
+    while pq:
+        # 현재 시점에서
+        # 누적 거리가 가장 짧은 노드에 대한 정보 꺼내기
+        dist, now = heapq.heappop(pq)
+
+        # 이미 방문한 지점 + 누적 거리가 더 짧게 방문한 적이 있다면 pass
+        if distance[now] < dist:
+            continue
+
+        # 인접 노드를 확인
+        for next in graph[now]:
+            next_node = next[0]
+            cost = next[1]
+
+            # next_node 로 가기 위한 누적 거리
+            new_cost = dist + cost
+
+            # 누적 거리가 기존보다 크네?
+            if distance[next_node] <= new_cost:
+                continue
+
+            distance[next_node] = new_cost
+            heapq.heappush(pq, (new_cost, next_node))
+
+dijkstra(0)
+print(distance)
+```
+
+```py
+import sys
+sys.stdin = open('input.txt', 'r')
+
+
+import heapq
+
+def dijkstra(graph, start):
+    # 시작 노드에서 다른 노드까지의 최단 거리를 저장하는 딕셔너리
+    distances = {node: float('infinity') for node in graph}
+    distances[start] = 0  # 시작 노드의 거리는 0
+
+    # 우선순위 큐 (거리, 노드)를 사용하여 노드를 방문 순서대로 관리
+    priority_queue = [(0, start)]
+
+    while priority_queue:
+        # 현재 노드와 현재까지의 최단 거리를 가져옴
+        # heapq.heappop()은 우선순위 큐에서 가장 작은 값을 가져옴
+        current_distance, current_node = heapq.heappop(priority_queue)
+
+        # 현재 노드가 이미 처리된 노드라면 무시
+        # 이를 위해 distances 딕셔너리에는 각 노드에 대한 최단 거리를 저장
+        # 현재 노드를 방문하기 전에 이미 해당 노드에 대해 더 짧은 거리로 방문한 경우에는 무시
+        if current_distance > distances[current_node]:
+            continue
+
+        # 현재 노드와 연결된 노드들을 순회
+        for neighbor, weight in graph[current_node].items():
+            distance = current_distance + weight
+
+            # 만약 이 경로를 통해 더 짧은 거리를 찾았다면 업데이트
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                heapq.heappush(priority_queue, (distance, neighbor))
+
+    return distances
+
+# 그래프를 딕셔너리로 표현
+graph = {
+    'A': {'B': 1, 'C': 4},
+    'B': {'A': 1, 'C': 2, 'D': 5},
+    'C': {'A': 4, 'B': 2, 'D': 1},
+    'D': {'B': 5, 'C': 1}
+}
+
+start_node = 'A'
+result = dijkstra(graph, start_node)
+print("시작 노드로부터의 최단 거리:")
+for node, distance in result.items():
+    print(f"{node}: {distance}")
+```
+
