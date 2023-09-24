@@ -29,8 +29,8 @@ Recursive_Power(x, n)
 		RETURN y * y * x
 ```
 
-- 지수가 짝수일 대는 지수를 반으로 나눠서 곱함
-- 지수가 홀수일 대는 지수에서 1을 빼고 반으로 나누어서 곱하고 밑을 한 번 더 곱함
+- 지수가 짝수일 때는 지수를 반으로 나눠서 곱함
+- 지수가 홀수일 때는 지수에서 1을 빼고 반으로 나누어서 곱하고 밑을 한 번 더 곱함
 - 이렇게 지수를 반으로 나눠가는 거듭 제곱 알고리즘의 수행 시간은 **O(logn)**
 
 
@@ -40,7 +40,7 @@ Recursive_Power(x, n)
 - 여러 개의 정렬된 자료의 집합을 병합하여 한 개의 정렬된 집합으로 만드는 방식
 - 자료를 최소 단위의 문제까지 나눈 후에 차례대로 정렬하여 최종 결과를 얻어냄 (top-down 방식)
 - 병합 정렬은 외부 정렬의 기본이 되는 정렬 알고리즘 
-  - Multi-Core CPU나 다수의 프로세서엣 정렬 알고리즘을 병렬화하기 위해 병합 정렬 알고리즘 활용
+  - Multi-Core CPU나 다수의 프로세서에서 정렬 알고리즘을 병렬화하기 위해 병합 정렬 알고리즘 활용
 - 시간 복잡도 : **O(nlogn)**
 
 
@@ -566,7 +566,7 @@ class priorityQueue:
     def __init__(self):
         self.queue = []
 
-        #  push
+    # push
     def push(self, item, priority):
         heapq.heappush(self.queue, (priority, item))
 
@@ -584,4 +584,3 @@ pq.push("task1", 1)
 pq.push("task2", 2)
 pq.push("task3", 3)
 ```
-
