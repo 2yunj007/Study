@@ -601,3 +601,74 @@ for node, distance in result.items():
     print(f"{node}: {distance}")
 ```
 
+```py
+import sys
+
+
+# 우선순위 큐를 사용하지 않는 코드
+
+def prim(graph):
+    V = len(graph)  # 그래프의 노드 수
+    visited = [False] * V  # 노드 방문 여부를 저장하는 리스트
+
+    # 시작 노드를 0번 노드로 선택
+    start_node = 2
+    visited[start_node] = True
+
+    # 시작 노드와 연결된 간선을 저장할 리스트
+    edges = []
+
+    # 시작 노드와 연결된 간선을 edges 리스트에 추가
+    for neighbor, weight in graph[start_node]:
+        edges.append((start_node, neighbor, weight))
+
+    # 최소 신장 트리를 저장하는 리스트
+    mst = []
+
+    while len(mst) < V - 1:  # 모든 노드를 방문할 때까지 반복
+        # 리스트에서 최소 가중치 간선을 찾음
+        min_edge = min(edges, key=lambda x: x[2])
+
+        u, v, weight = min_edge
+
+        # 이미 방문한 노드인 경우 무시
+        if visited[v]:
+            edges.remove(min_edge)  # 이미 방문한 노드와 연결된 간선을 edges 리스트에서 제거
+            continue
+
+        # 간선 (u, v)를 최소 신장 트리에 추가
+        mst.append(min_edge)
+        visited[v] = True  # 노드 v를 방문했음을 표시
+
+        # 새로 추가된 노드 v와 연결된 간선을 edges 리스트에 추가
+        for neighbor, weight in graph[v]:
+            if not visited[neighbor]:  # 방문하지 않은 노드만을 고려
+                edges.append((v, neighbor, weight))
+
+        # 현재 간선을 edges 리스트에서 제거
+        edges.remove(min_edge)  # 현재 처리한 간선은 다음 루프에서 중복으로 처리하지 않도록 제거
+
+    return mst
+
+
+# 그래프 정보 입력
+V, E = map(int, input().split())
+graph = [[] for _ in range(V)]
+
+for _ in range(E):
+    u, v, w = map(int, input().split())
+    # 무방향 그래프이므로 u에서 v로 가는 간선과 v에서 u로 가는 간선을 추가
+    graph[u - 1].append((v - 1, w))
+    graph[v - 1].append((u - 1, w))
+
+# MST 계산
+minimum_spanning_tree = prim(graph)
+
+# 결과 출력
+total_weight = sum(weight for _, _, weight in minimum_spanning_tree)
+print("Minimum Spanning Tree:")
+for u, v, weight in minimum_spanning_tree:
+    print(f"Edge ({u + 1}-{v + 1}), Weight: {weight}")
+print(f"Total Weight of MST: {total_weight}")
+```
+

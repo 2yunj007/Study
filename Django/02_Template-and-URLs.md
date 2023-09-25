@@ -160,8 +160,28 @@ def dinner(request):
 </html>
 ```
 
-- 기존 하위 템플릿의 변화
+- 템플릿 추가 경로 작성
 
+```py
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # 템플릿 추가 경로를 작성하는 곳
+        'DIRS': [BASE_DIR / 'templates',],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+
+- 기존 하위 템플릿의 변화
   1. extends 태그로 articles의 base.html을 상속받음
 
   2. 부모가 정의한 content라고 하는 공간에 내용을 채워 넣음
