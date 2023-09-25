@@ -246,10 +246,9 @@ TEMPLATES = [
        - 만약 이 속성을 지정하지 않으면 데이터는 현재 form에 있는 페이지의 URL로 보내짐
 
      - **method**
-
-       - 데이터를 어떤 방식으로 보낼 것인지 정의
-
-       - 데이터 HTTP request methods (GET, POST)를 지정
+- 데이터를 어떤 방식으로 보낼 것인지 정의
+       
+- 데이터 HTTP request methods (GET, POST)를 지정
 
 
 
@@ -262,7 +261,7 @@ TEMPLATES = [
 
   - input의 핵심 속성
 
-  - 입력한 데이터에 붙이는 이름(key)
+  - 입력한 데이터에 붙이는 이름 (key)
 
   - 데이터를 제출했을 때 서버는 name 속성에 설정된 값을 통해서만 사용자가 입력한 데이터에 접근할 수 있음
 

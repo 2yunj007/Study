@@ -43,7 +43,7 @@
 
 ### Create
 
-#### QuerySey API 실습 사전 준비
+#### QuerySet API 실습 사전 준비
 
 - 외부 라이브러리 설치 및 설정
 
