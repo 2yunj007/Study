@@ -106,7 +106,7 @@ def SelectionSort(n, N, arr):
 
 ## 재귀 호출을 통한 순열 생성
 
-```python
+```
 # p[]: 데이터가 저장된 배열
 # k: 원소의 개수, n: 선택된 원소의 수
 perm(i, k)
