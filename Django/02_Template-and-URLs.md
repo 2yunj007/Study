@@ -168,15 +168,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 템플릿 추가 경로를 작성하는 곳
         'DIRS': [BASE_DIR / 'templates',],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
+        ...
     },
 ]
 ```
@@ -247,7 +239,7 @@ TEMPLATES = [
 
      - **method**
 - 데이터를 어떤 방식으로 보낼 것인지 정의
-       
+  
 - 데이터 HTTP request methods (GET, POST)를 지정
 
 

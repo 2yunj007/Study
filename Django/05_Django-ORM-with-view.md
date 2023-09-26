@@ -37,7 +37,6 @@ $ python manage.py createsuperuser	# 게시글 작성
 from django.contrib import admin
 from .models import Article
 
-# Register your models here.
 admin.site.register(Article)
 ```
 
