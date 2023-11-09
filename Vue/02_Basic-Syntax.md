@@ -1,4 +1,4 @@
-# Basic Symtax 1
+# Basic Syntax 1
 
 ## Template Syntax
 
@@ -45,7 +45,7 @@ const rawHtml = ref('<span style="color:red">This should be red.</span>')
 const dynamicId = ref('my-id')
 ```
 
-- 콧수염 구문은 HTML 속성 내에서 사용할 수 없기 떔누에 v-bind를 사용
+- 콧수염 구문은 HTML 속성 내에서 사용할 수 없기 때문에 v-bind를 사용
 - HTML의 id 속성 값을 vue의 dynamicId 속성과 동기화되도록 함
 - 바인딩 값이 null이나 undefind인 경우 렌더링 요소에서 제거됨
 
@@ -562,3 +562,13 @@ const selected = ref('')
 - 사용자가 입력 장치에서 기본적으로 사용할 수 없는 문자(비영어권 언어)를 입력할 수 있도록 하는 운영 체제 구성 프로그램
 - 일반적으로 키보드 키보다 자모가 더 많은 언어에서 사용해야 함
 - IME가 동작하는 방식과 Vue의 양방향 바인딩(v-model) 동작 방식이 상충하기 때문에 한국어 입력 시 예상대로 동작하지 않았던 것
+
+
+
+# Basic Syntax 2
+
+## Computed()
+
+> 계산된 속성을 정의하는 함수
+
+- 미리 계산된 속성을 사용하여 템플릿에서 표현식을 단순하게 하고 불필요한 반복 연산을 줄임

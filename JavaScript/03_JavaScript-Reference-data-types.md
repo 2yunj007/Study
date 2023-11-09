@@ -389,8 +389,8 @@ const age = 30
 // }
 
 const user = {
-  name: name,
-  age: age,
+  name,
+  age,
 }
 ```
 
