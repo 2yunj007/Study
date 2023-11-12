@@ -298,7 +298,7 @@ const {id} = object
 
 - 단, ref가 {{}}의 최종 평가 값인 경우는 unwrap 가능
   - `{{ object.id }}`
-  - `{{ object.id.value }}`와 동일
+  - `{{ object.id.value }}`와 동일하게 0으로 출력
 
 
 
